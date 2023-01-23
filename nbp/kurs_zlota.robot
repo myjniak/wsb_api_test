@@ -18,8 +18,6 @@ Lack Of Data When Correct Dates Are Given, Error 404 Should Happen
 Structure Of Table C Should Be As Expected
     ${response}    GET    https://api.nbp.pl/api/exchangerates/rates/c/usd/last/10
     ${pretty}   Pretty Json    ${response.json()}
-
-    # przykład użycia keyworda na weryfikację, zakomentowane, bo działało tylko 19.01.2023:
-    # Should Be Equal As Numbers    ${response.json()["rates"][0]["ask"]}    4.4342
-
-    # ZADANIE :D  Użyj     Should Be Equal    albo     Should Be True     do walidacji klucza code i table
+    Should Be Equal    ${response.json()["table"]}    C
+    Should Be Equal    ${response.json()["code"]}    USD
+    Length Should Be    ${response.json()["rates"]}     10
